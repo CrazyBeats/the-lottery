@@ -72,55 +72,70 @@ const TicketInfo: React.FC<TicketInfoProps> = ({
       </div>
 
       <div className="w-80">
-        <div className="bg-yuzu-orange rounded-t-lg p-4 flex justify-between items-center">
-          <div className="text-3xl font-bold">{ticketData.quantity}</div>
-          <div className="text-right">
-            <div>MAX {ticketData.maxLimit.toLocaleString()} YUZU</div>
-            <div>Ticket</div>
+        <div className="bg-[#FFA706] rounded-t-lg p-4 border-[2px] border-[#102C24]">
+          <div className="flex justify-between items-center mb-2">
+            <div className="text-[#102c24] text-[14px] font-medium font-['Poppins']">Buy</div>
+            <div className="text-[#2D6A4F] font-medium">MAX {ticketData.maxLimit.toLocaleString()} YUZU</div>
           </div>
-        </div>
+          
+          <div className="flex justify-between items-center mb-4">
+            <input
+              type="number"
+              value={ticketData.quantity}
+              onChange={(e) => {
+                const value = parseInt(e.target.value) || 0;
+                const limitedValue = Math.min(value, ticketData.maxLimit);
+                handleQuantityChange(limitedValue);
+              }}
+              className="text-5xl font-bold text-[#2D6A4F] bg-transparent w-32 outline-none"
+              min="0"
+              max={ticketData.maxLimit}
+            />
+            <div className="text-[#E6622B] font-medium">Ticket</div>
+          </div>
 
-        <div className="bg-yuzu-cream rounded-b-lg p-4 text-black">
-          <div className="flex justify-between gap-2 mb-4">
+          <div className="flex justify-between gap-2">
             <button
-              className="bg-gray-200 flex-1 py-2 rounded"
-              onClick={() => handleQuantityChange(1)}
+              className="bg-[#f39321] hover:bg-[#f39321] flex-1 py-2 rounded-lg text-[#fff6a4] font-medium"
+              onClick={() => handleQuantityChange(5)}
             >
-              1
+              5
             </button>
             <button
-              className="bg-gray-200 flex-1 py-2 rounded"
+              className="bg-[#f39321] hover:bg-[#f39321] flex-1 py-2 rounded-lg text-[#fff6a4] font-medium"
               onClick={() => handleQuantityChange(10)}
             >
               10
             </button>
             <button
-              className="bg-gray-200 flex-1 py-2 rounded"
+              className="bg-[#f39321] hover:bg-[#f39321] flex-1 py-2 rounded-lg text-[#fff6a4] font-medium"
               onClick={() => handleQuantityChange(50)}
             >
               50
             </button>
             <button
-              className="bg-gray-200 flex-1 py-2 rounded"
+              className="bg-[#f39321] hover:bg-[#f39321] flex-1 py-2 rounded-lg text-[#fff6a4] font-medium"
               onClick={() => handleQuantityChange(ticketData.maxLimit)}
             >
               MAX
             </button>
           </div>
+        </div>
 
-          <div className="flex justify-between mb-4">
+        <div className="bg-[#157433] rounded-b-lg p-4 border-x-[2px] border-[#102C24] shadow-[0_4px_0_rgba(0,0,0,1)]">
+          <div className="flex justify-between mb-4 text-white">
             <span>Cost</span>
-            <span>{ticketData.cost} YUZU</span>
+            <span>{ticketData.quantity} YUZU</span>
           </div>
 
           <button
-            className="bg-yuzu-green w-full py-3 rounded-lg text-black font-bold mb-2"
+            className="bg-[#C2F970] hover:bg-[#B5EC63] w-full py-3 rounded-lg text-[#102C24] font-bold mb-2  shadow-[0_3px_0_rgba(0,0,0,1)]"
             onClick={() => console.log(`Buying ${ticketData.quantity} tickets`)}
           >
             Buy {ticketData.quantity} Tickets
           </button>
 
-          <div className="text-xs text-center">
+          <div className="text-xs text-center text-white/80">
             Buying ticket will cost YUZU, and all purchases are final
           </div>
         </div>
